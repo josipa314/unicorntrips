@@ -1,0 +1,10 @@
+<h1>List of Agencies in our Database:</h1>
+
+{{#each agencies}}
+  <section class="agency">
+    <h2>{{this.name}}</h2>
+    <h2>{{this.location}} Location</h2>
+
+    <a href="/agencies-list/{{this._id}} "> More details </a>
+  </section>
+{{/each}}
