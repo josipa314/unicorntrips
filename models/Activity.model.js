@@ -3,6 +3,10 @@ const { Schema, model } = require("mongoose");
 
 const activitySchema = new Schema({
   title: String,
+  imageFile: {
+    type: String,
+    default: "default.jpg",
+  },
   description: String,
   agency: {
     type: mongoose.Schema.Types.ObjectId,

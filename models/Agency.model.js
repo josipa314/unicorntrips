@@ -4,6 +4,7 @@ const { Schema, model } = require("mongoose");
 const agencySchema = new Schema(
   {
     name: String,
+    imageUrl: String,
     email: {
       type: String,
       required: [true, "Email is required"],
