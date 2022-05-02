@@ -1,0 +1,30 @@
+<h2>Edit the activity: {{title}}</h2>
+
+<form action="/activities/{{_id}}/edit" method="POST">
+  <label> Title:
+    <input type="text" name="title" value="{{title}}" />
+  </label>
+
+    <label> Description:
+    <textarea name="description" cols="50" rows="4">{{description}}</textarea>
+  </label>
+
+{{!-- 
+  <label> Agency:
+    <input type="text" name="agency" value="{{agency}}" />
+  </label> --}}
+
+  <label> Location:
+    <input type="text" name="location" value="{{location}}" />
+  </label>
+
+  <label> Rating:
+    <input type="number" name="rating" min="1" max="10" value="{{rating}}" />
+  </label>
+
+ <label> Price:
+    <input type="number" name="rating" value="{{price}}" />
+  </label>
+
+  <button>Save changes</button>
+</form>
