@@ -17,3 +17,36 @@ h1 {
   margin-inline-end: 0px;
   font-weight: bold;
 }
+
+
+form {
+  display: block;
+  margin: 1rem auto;
+}
+
+input, textarea, select {
+  display: block;
+  margin: 0.5rem 0 1rem;
+}
+
+header {
+  text-align: center;
+}
+
+header form {
+  display: inline-block;
+}
+
+.header {
+  background-color: #eee;
+  border: 1px solid #666;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.warning {
+  border: 1px solid rgb(167, 111, 9);
+  background-color: rgb(235, 212, 170);
+  padding: 1rem;
+}
+
