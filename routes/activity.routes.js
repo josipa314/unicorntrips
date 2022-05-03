@@ -2,6 +2,7 @@ const Activity = require("../models/Activity.model");
 const Agency = require("../models/Agency.model");
 
 const router = require("express").Router();
+const fileUploader = require("../config/cloudinary.config");
 
 router.get("/", (req, res, next) => {
   Activity.find()
@@ -16,21 +17,18 @@ router.get("/", (req, res, next) => {
     });
 });
 
-
-
 // CREATE ONE NEW ACTIVITY: render form
-router.get("/create",(req, res, next) => {
-    Agency.find()
-        .then((agenciesArr) => {
-            res.render("activities/activity-create", {agencies: agenciesArr});
-        })
-        .catch(err => {
-            console.log("error getting agencies from DB", err)
-            next(err);
-        });   
-/*             res.render("activities/activity-create"); */
-          })
-        
+router.get("/create", (req, res, next) => {
+  Agency.find()
+    .then((agenciesArr) => {
+      res.render("activities/activity-create", { agencies: agenciesArr });
+    })
+    .catch((err) => {
+      console.log("error getting agencies from DB", err);
+      next(err);
+    });
+  /*             res.render("activities/activity-create"); */
+});
 
 /* 
 // CREATE ONE NEW ACTIVITY: process form
@@ -56,94 +54,90 @@ router.post("/create", (req, res, next) => {
 
 }) */
 
-
 // UPDATE ONE ACTIVITY: display form
 router.get("/:activityId/edit", (req, res, next) => {
-    const id = req.params.activityId;
-    Activity.findByIdAndUpdate(id)
-        .then((activityDetails) => {
-            res.render("activities/activity-edit", activityDetails);
-        })
-        .catch(err => {
-            console.log("error getting activity details from DB", err)
-            next(err);
-        });
+  const id = req.params.activityId;
+  Activity.findByIdAndUpdate(id)
+    .then((activityDetails) => {
+      res.render("activities/activity-edit", activityDetails);
+    })
+    .catch((err) => {
+      console.log("error getting activity details from DB", err);
+      next(err);
+    });
 });
 
 // UPDATE ONE ACTIVITY:: process form
 router.post("/:activityId/edit", (req, res, next) => {
-    const id = req.params.activityId;
-    const newDetails = {
-        title: req.body.title,
-        description: req.body.description,
-        agency: req.body.agency,
-        location: req.body.location,
-        rating: req.body.rating,
-        price: req.body.price,
-    };
+  const id = req.params.activityId;
+  const newDetails = {
+    title: req.body.title,
+    description: req.body.description,
+    agency: req.body.agency,
+    location: req.body.location,
+    rating: req.body.rating,
+    price: req.body.price,
+  };
 
-    Activity.findByIdAndUpdate(id, newDetails)
-        .then((activityFromDB) => {
-            res.redirect(`/activities/${activityFromDB._id}`);
-        })
-        .catch(err => {
-            console.log("error updating activity in DB", err)
-            next(err);
-        });
+  Activity.findByIdAndUpdate(id, newDetails)
+    .then((activityFromDB) => {
+      res.redirect(`/activities/${activityFromDB._id}`);
+    })
+    .catch((err) => {
+      console.log("error updating activity in DB", err);
+      next(err);
+    });
 });
 
 // READ ONE ACTIVITY DETAILS: display activity details
 router.get("/:activityId", (req, res, next) => {
-    const id = req.params.activityId;
+  const id = req.params.activityId;
 
-    Activity.findById(id)
-        .then((activityDetails) => {
-            console.log(activityDetails)
-            res.render("activities/activity-details", activityDetails);
-        })
-        .catch(err => {
-            console.log("error getting activity details from DB", err)
-            next(err);
-        });
-})
+  Activity.findById(id)
+    .then((activityDetails) => {
+      console.log(activityDetails);
+      res.render("activities/activity-details", activityDetails);
+    })
+    .catch((err) => {
+      console.log("error getting activity details from DB", err);
+      next(err);
+    });
+});
 
 // UPDATE ONE ACTIVITY: process form
 router.post("/:activityId/edit", (req, res, next) => {
+  const id = req.params.activityId;
 
-    const id = req.params.activityId;
+  const newDetails = {
+    title: req.body.title,
+    description: req.body.description,
+    agency: req.body.agency,
+    location: req.body.location,
+    rating: req.body.rating,
+    price: req.body.price,
+  };
 
-    const newDetails = {
-        title: req.body.title,
-        description: req.body.description,
-        agency: req.body.agency,
-        location: req.body.location,
-        rating: req.body.rating,
-        price: req.body.price,
-    };
-
-    Activity.findByIdAndUpdate(id, newDetails)
-        .then((activityFromDB) => {
-            console.log(activityFromDB);
-            res.redirect(`/activities/${activityFromDB._id}`);
-        })
-        .catch(err => {
-            console.log("error updating activity in DB", err)
-            next(err);
-        });
+  Activity.findByIdAndUpdate(id, newDetails)
+    .then((activityFromDB) => {
+      console.log(activityFromDB);
+      res.redirect(`/activities/${activityFromDB._id}`);
+    })
+    .catch((err) => {
+      console.log("error updating activity in DB", err);
+      next(err);
+    });
 });
 
-
 // DELETE that activity:
-router.post("/:activityId/delete",(req, res, next) => {
-    const id = req.params.activityId;
-    Activity.findByIdAndRemove(id)
-        .then(response => {
-            res.redirect("/activities");
-        })
-        .catch(err => {
-            console.log("error deleting activity from DB", err);
-            next(err);
-        });
-
+router.post("/:activityId/delete", (req, res, next) => {
+  const id = req.params.activityId;
+  Activity.findByIdAndRemove(id)
+    .then((response) => {
+      res.redirect("/activities");
+    })
+    .catch((err) => {
+      console.log("error deleting activity from DB", err);
+      next(err);
+    });
 });
 module.exports = router;

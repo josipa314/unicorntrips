@@ -1,6 +1,6 @@
 <h2>Create an Agency</h2>
 
-<form action="/agency-create" method="POST">
+<form action="/agency-create" method="POST" enctype="multipart/form-data">
 
   <label>
     Name:
@@ -25,10 +25,14 @@
     <textarea name="location"> </textarea>
   </label>
   <br />
+  <label>Image:
+    <input type="file" name="agency-image" class="form-control-file" />
+  </label>
+  <br />
   <label>
     Rate:
     <input type="number" name="rating" min="1" max="10" />
   </label>
   <br />
   <button type="submit"> Create </button>
-</form>
+</form>>

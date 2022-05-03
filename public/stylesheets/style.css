@@ -1,6 +1,7 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Lobster", cursive;
+  font-family: "Tapestry", cursive;
 }
 
 a {
@@ -8,29 +9,43 @@ a {
 }
 
 h1 {
-  color: 15px;
   display: block;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-block-start: 0.67em;
   margin-block-end: 0.67em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
+  color: #ff8e00;
+}
+#main {
+  border-bottom: 8px solid var(--decorative-guiding-red);
+  height: 520px;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  position: relative;
 }
 
+#homePage {
+  width: 1000px;
+  height: 450px;
+}
 
 form {
   display: block;
   margin: 1rem auto;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   display: block;
   margin: 0.5rem 0 1rem;
 }
 
-header {
-  text-align: center;
+nav {
+  text-align: end;
+  font-size: 16px;
 }
 
 header form {
@@ -38,10 +53,7 @@ header form {
 }
 
 .header {
-  background-color: #eee;
-  border: 1px solid #666;
-  margin: 1rem auto;
-  padding: 1rem;
+  text-align: start;
 }
 
 .warning {
@@ -49,4 +61,3 @@ header form {
   background-color: rgb(235, 212, 170);
   padding: 1rem;
 }
-

@@ -2,6 +2,8 @@ const Agency = require("../models/Agency.model");
 
 const router = require("express").Router();
 
+const fileUploader = require("../config/cloudinary.config");
+
 // READ: display list of agencies
 router.get("/", (req, res, next) => {
   Agency.find()

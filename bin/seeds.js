@@ -18,6 +18,7 @@ mongoose
 const agencies = [
   {
     name: "Island Hoppers",
+    img: "./public/images/agencies/Islandhopping.webp",
     email: "test1@test.com",
     passwordHash: "12345678",
     description: "specialised in Island trips",
@@ -26,6 +27,7 @@ const agencies = [
   },
   {
     name: "Fantastic Voyages",
+    img: "./public/images/agencies/FanstasticVoyages.webp",
     email: "test2@test.com",
     passwordHash: "12345678",
     description: "specialised in honeymoontrips, special occasion trips",
@@ -34,6 +36,7 @@ const agencies = [
   },
   {
     name: "Braveheart Adventures",
+    img: "./public/images/agencies/BraveHeartAdventures.png",
     email: "test3@test.com",
     passwordHash: "12345678",
     description: "specialised in more adventourous tours",
@@ -42,6 +45,7 @@ const agencies = [
   },
   {
     name: "The Wandering Wayfarer",
+    img: "./public/images/agencies/WanderingWayfares.webp",
     email: "test4@test.com",
     passwordHash: "12345678",
     description: "specialised in more adventourous tours",
@@ -88,6 +92,7 @@ const activities = [
     title: "Canyoning",
     description:
       " explore thousands of years old canyon and it's crystal clear water ",
+
     location: "Omis",
     difficulty: "accessible",
     rating: 8,
