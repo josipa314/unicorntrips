@@ -25,10 +25,25 @@ h1 {
   padding: 15px 10px;
   position: relative;
 }
+.centered {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 #homePage {
   width: 1000px;
   height: 450px;
+}
+
+#imgAgencies {
+  width: 200px;
+  height: 200px;
+}
+#imgActivities {
+  width: 200px;
+  height: 200px;
 }
 
 form {

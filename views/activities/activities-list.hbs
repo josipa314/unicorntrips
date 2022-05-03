@@ -1,9 +1,12 @@
-<h1>List of Activities in our Database:</h1>
+<h1>List of Activities:</h1>
 
 {{#each activities}}
   <section class="activities-list">
     <h2>{{this.title}}</h2>
     <h4>by {{this.agency.name}}</h4>
+
+    <img id="imgActivities" src={{imageFile}} alt={{this.title}} />
+
     <a href="/activities/{{this._id}}">More details</a>
   </section>
 {{/each}}
