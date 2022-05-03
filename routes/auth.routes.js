@@ -14,10 +14,12 @@ const User = require("../models/Agency.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
+//REGISTRATION: display form
 router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup");
 });
 
+//REGISTRATION: process form
 router.post("/signup", isLoggedOut, (req, res) => {
   const { username, password } = req.body;
 
@@ -89,10 +91,12 @@ router.post("/signup", isLoggedOut, (req, res) => {
   });
 });
 
+//LOGIN: display form
 router.get("/login", isLoggedOut, (req, res) => {
   res.render("auth/login");
 });
 
+//LOGIN: process form
 router.post("/login", isLoggedOut, (req, res, next) => {
   const { username, password } = req.body;
 
@@ -141,6 +145,12 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
 });
 
+//USER PROFILE PAGE
+router.get('/user-profile', (req, res, next) => {
+  res.render('auth/user-profile');
+});
+
+//LOGOUT
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {

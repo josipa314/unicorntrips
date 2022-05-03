@@ -3,6 +3,7 @@ const Agency = require("../models/Agency.model");
 
 const router = require("express").Router();
 
+//SHOW ALL ACTIVITIES/
 router.get("/", (req, res, next) => {
   Activity.find()
     .populate("agency")

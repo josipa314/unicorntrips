@@ -46,4 +46,32 @@ router.post("/create", (req, res, next) => {
     });
 });
 
+// READ ONE AGENCY DETAILS: display one Agency details
+router.get("/:agencyId", (req, res, next) => {
+    const id = req.params.agencyId;
+
+    Agency.findById(id)
+        .then((agencyDetails) => {
+            console.log(agencyDetails)
+            res.render("agencies/agency-details", agencyDetails);
+        })
+        .catch(err => {
+            console.log("error getting agency details from DB", err)
+            next(err);
+        });
+})
+
+// DELETE that Agency:
+router.post("/:agencyId/delete",(req, res, next) => {
+    const id = req.params.agencuId;
+    Agency.findByIdAndRemove(id)
+        .then(response => {
+            res.redirect("/agencies");
+        })
+        .catch(err => {
+            console.log("error deleting Agency from DB", err);
+            next(err);
+        });
+
+});
 module.exports = router;
