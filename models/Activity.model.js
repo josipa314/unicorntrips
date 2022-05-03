@@ -6,7 +6,7 @@ const activitySchema = new Schema({
 
   imageFile: {
     type: String,
-    default: "default.jpg",
+    default: "/images/let-us-travel.jpg",
   },
   description: String,
   agency: {
