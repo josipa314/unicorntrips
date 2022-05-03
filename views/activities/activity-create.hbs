@@ -7,27 +7,34 @@
     <input type="text" name="title" required />
   </label>
 
-  <label>
-    Description:
-    <textarea name="description" cols="30" rows="4"> </textarea>
-  </label>
+{{!--   <label>Image:
+    <input type="text" name="imageFile" class="form-control-file" />
+  </label> --}}
+
 
   <label>
+    Description:
+    <textarea type="text" name="description" cols="30" rows="4"> </textarea>
+  </label>
+
+{{!--   <label>
     Organised by Agency:
-    <select name="agency">
+    <select>
       {{#each agencies}}
-        <option value="{{this._id}}">{{this.name}}</option>
+        <option name="agency" value={{this}}>{{this.name}}</option>
       {{/each}}
     </select>
-  </label>
+  </label> --}}
 
   <label>
     Location:
     <input type="text" name="location" />
   </label>
 
-  <label>Image:
-    <input type="file" name="activity-image" class="form-control-file" />
+
+  <label>
+    Difficulty:
+    <input type="text" name="difficulty" />
   </label>
 
   <label>

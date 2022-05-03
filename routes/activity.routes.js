@@ -36,9 +36,9 @@ router.post("/create", (req, res, next) => {
 
     const newActivity = {
         title: req.body.title,
-        imageFile: req.body.imageFile,
+        /* imageFile: req.body.imageFile, */
         description: req.body.description,
-        agency: req.body.agency,
+      /*   agency: req.body.agency, */
         location: req.body.location,
         difficulty: req.body.difficulty,
         rating: req.body.rating,
@@ -47,7 +47,7 @@ router.post("/create", (req, res, next) => {
 
     Activity.create(newActivity)
         .then((activityFromDB) => {
-          console.log(newActivity);
+          console.log(activityFromDB);
             res.redirect("/activities");
         })
         .catch(err => {
