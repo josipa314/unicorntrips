@@ -1,0 +1,21 @@
+<h1>Details about Agency : {{name}}</h1>
+<h1></h1>
+<hr>
+<p>located in: {{location}}</p>
+<p>Description: {{description}}</p>
+<p>Rated on average: {{rating}}/10</p>
+<br>
+<p>Organizes the following activities: 
+    TO DO: {{!--do a loop that lists all the activities of that agency {{activity}} --}}, </p>
+
+<br>
+<hr>
+
+<a href="/agencies/{{_id}}/edit">Edit</a>
+
+<form action="/agencies/{{_id}}/delete" method="POST">
+  <button type="submit">Delete this Agency</button>
+</form>
+
+<hr>
+<a href="/agencies">Back to the list of agencies</a>

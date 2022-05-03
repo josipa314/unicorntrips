@@ -1,14 +1,15 @@
-<h1>List of Agencies in our Database:</h1>
+<h1>List of our Agencies: </h1>
 
 {{#each agencies}}
   <section class="agency">
     <h2>{{this.name}}</h2>
     <h3>Located in {{this.location}}</h3>
     <h4>And rated on average: {{this.rating}}</h3>
-     <a href="/activities"> Click here to see the list of activities they propose:</a>
-
     <br>
-    <a href="/agencies-list/{{this._id}} "> More details </a>
+    <hr>
+    <a href="/activities"> Click here to see the list of activities they propose:</a>
+    <br>
+    <a href="/agencies/{{this._id}} "> More details </a>
     <hr>
   </section>
 {{/each}}

@@ -4,6 +4,7 @@ const Agency = require("../models/Agency.model");
 const router = require("express").Router();
 const fileUploader = require("../config/cloudinary.config");
 
+//SHOW ALL ACTIVITIES/
 router.get("/", (req, res, next) => {
   Activity.find()
     .populate("agency")
