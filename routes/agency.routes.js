@@ -19,20 +19,17 @@ router.get("/", (req, res, next) => {
 
 // CREATE: render form
 router.get("/create", (req, res, next) => {
-  Agency.find()
-    .then((agenciesArr) => {
-      res.render("agencies/agency-create", { agencies: agenciesArr });
-    })
-    .catch((err) => {
-      console.log("error getting agency from DB", err);
-      next(err);
+      res.render("agencies/agency-create");
     });
-});
+
 
 // CREATE: process form
 router.post("/create", (req, res, next) => {
   const newAgency = {
     name: req.body.name,
+    imageFile: req.body.imageFile,
+    email: req.body.email,
+    passwordHash: req.body.passwordHash,
     description: req.body.description,
     location: req.body.location,
     rating: req.body.rating,
@@ -40,7 +37,8 @@ router.post("/create", (req, res, next) => {
 
   Agency.create(newAgency)
     .then((agencyFromDB) => {
-      res.redirect("/");
+      console.log(newAgency);
+      res.redirect("/agencies");
     })
     .catch((err) => {
       console.log("error creating a new agency on DB", err);
@@ -65,7 +63,7 @@ router.get("/:agencyId", (req, res, next) => {
 
 // DELETE that Agency:
 router.post("/:agencyId/delete",(req, res, next) => {
-    const id = req.params.agencuId;
+    const id = req.params.agencyId;
     Agency.findByIdAndRemove(id)
         .then(response => {
             res.redirect("/agencies");
