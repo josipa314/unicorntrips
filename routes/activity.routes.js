@@ -32,29 +32,30 @@ router.get("/create", (req, res, next) => {
 
 
 // CREATE ONE NEW ACTIVITY: process form
-router.post("/create", (req, res, next) => {
+router.post("/create", fileUploader.single('imageFile'), (req, res, next) => {
 
     const newActivity = {
         title: req.body.title,
-        imageFile: req.body.imageFile,
+        imageFile: req.file.path, //note: reading req.file
         description: req.body.description,
         agency: req.body.agency,
         location: req.body.location,
         difficulty: req.body.difficulty,
         rating: req.body.rating,
-        price: req.body.price,
+        price: req.body.price
     };
 
     Activity.create(newActivity)
         .then((activityFromDB) => {
-          console.log(newActivity);
-            res.redirect("/activities");
+          //console.log(activityFromDB);
+          //console.log(newActivity)
+          console.log(req.body);
+          res.redirect("/activities");
         })
         .catch(err => {
             console.log("error creating a new activity on DB", err)
             next(err);
         });
-
 })
 
 
@@ -103,6 +104,7 @@ router.post("/:activityId/edit", (req, res, next) => {
 
   Activity.findByIdAndUpdate(id, newDetails)
     .then((activityFromDB) => {
+      console.log(newDetails);
       console.log(activityFromDB);
       res.redirect(`/activities/${activityFromDB._id}`);
     })

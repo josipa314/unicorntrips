@@ -7,28 +7,35 @@
     <input type="text" name="name" required />
   </label>
   <br />
+
+   <label>Upload an Image: 
+    <input type="file" name="imageFile" class="form-control-file" />
+  </label>
+  <br />
+
   <label>Enter your email:
-    <input type="email" name="email" , required />
+    <input type="email" name="email" required />
   </label>
   <br />
+
   <label>Password:
-    <input type="password" name="password" required />
+    <input type="password" name="passwordHash" required />
   </label>
   <br />
+
   <label>
     Description:
     <textarea name="description" cols="30" rows="4"> </textarea>
   </label>
   <br />
+
   <label>
     Location:
-    <textarea name="location"> </textarea>
+    <input type="text" name="location" />
   </label>
   <br />
-  <label>Image:
-    <input type="file" name="agency-image" class="form-control-file" />
-  </label>
-  <br />
+
+
   <label>
     Rate:
     <input type="number" name="rating" min="1" max="10" />

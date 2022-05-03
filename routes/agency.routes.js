@@ -17,12 +17,12 @@ router.get("/", (req, res, next) => {
     });
 });
 
-// CREATE: render form
+// CREATE ONE NEW AGENCY: render form
 router.get("/create", (req, res, next) => {
   res.render("agencies/agency-create");
 });
 
-// CREATE: process form
+// CREATE ONE NEW AGENCY:: process form
 router.post("/create", (req, res, next) => {
   const newAgency = {
     name: req.body.name,
@@ -31,7 +31,7 @@ router.post("/create", (req, res, next) => {
     passwordHash: req.body.passwordHash,
     description: req.body.description,
     location: req.body.location,
-    rating: req.body.rating,
+    rating: req.body.rating
   };
 
   Agency.create(newAgency)
