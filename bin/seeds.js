@@ -18,7 +18,7 @@ mongoose
 const agencies = [
   {
     name: "Island Hoppers",
-    img: "./public/images/agencies/Islandhopping.webp",
+    imageFile: "/images/agencies/Islandhopping.webp",
     email: "test1@test.com",
     passwordHash: "12345678",
     description: "specialised in Island trips",
@@ -27,7 +27,7 @@ const agencies = [
   },
   {
     name: "Fantastic Voyages",
-    img: "./public/images/agencies/FanstasticVoyages.webp",
+    imageFile: "/images/agencies/FantasticVoyages.webp",
     email: "test2@test.com",
     passwordHash: "12345678",
     description: "specialised in honeymoontrips, special occasion trips",
@@ -36,7 +36,7 @@ const agencies = [
   },
   {
     name: "Braveheart Adventures",
-    img: "./public/images/agencies/BraveHeartAdventures.png",
+    imageFile: "/images/agencies/BraveHeartAdventures.png",
     email: "test3@test.com",
     passwordHash: "12345678",
     description: "specialised in more adventourous tours",
@@ -45,7 +45,7 @@ const agencies = [
   },
   {
     name: "The Wandering Wayfarer",
-    img: "./public/images/agencies/WanderingWayfares.webp",
+    imageFile: "/images/agencies/WanderingWayfarers.jpg",
     email: "test4@test.com",
     passwordHash: "12345678",
     description: "specialised in more adventourous tours",
@@ -57,6 +57,7 @@ const agencies = [
 const activities = [
   {
     title: "Blue Cave Boat Tour",
+    imageFile: "/images/activities/blueCave.jpg",
     description: "Discover Blue cave on a daily trip via boat tour",
     location: "Vis Island",
     difficulty: "easy",
@@ -65,6 +66,7 @@ const activities = [
   },
   {
     title: "ZipLine",
+    imageFile: "/images/activities/zipline-omis.jpeg",
     description: "Sensations guaranteed via Zipline above Omis",
     location: "Omis",
     difficulty: "hard",
@@ -73,6 +75,7 @@ const activities = [
   },
   {
     title: "Horse Riding",
+    imageFile: "/images/activities/horseRiding.jpg",
     description: "Discover less touristic paths in the country side by horse",
     location: "Podstrana",
     difficulty: "accessible",
@@ -81,6 +84,7 @@ const activities = [
   },
   {
     title: "Islands Tour",
+    imageFile: "/images/activities/hvarIsland.jpg",
     description:
       "Discover two of the most famous islands in Croatia: Hvar and Brac",
     location: "Hvar",
@@ -90,9 +94,9 @@ const activities = [
   },
   {
     title: "Canyoning",
+    imageFile: "/images/activities/canyoning.jpg",
     description:
       " explore thousands of years old canyon and it's crystal clear water ",
-
     location: "Omis",
     difficulty: "accessible",
     rating: 8,
@@ -100,6 +104,7 @@ const activities = [
   },
   {
     title: "Skydiving",
+    imageFile: "/images/activities/skydivingZagreb.jpg",
     description:
       "Unforgettable experience, full of adrenaline but also beautiful views over the sea and mountains",
     location: "Zagreb",
@@ -109,6 +114,7 @@ const activities = [
   },
   {
     title: "Creepy tour",
+    imageFile: "/images/activities/abondonedFactories.jpg",
     description: "Go explore abondoned buidings and factories",
     location: "Sinj",
     difficulty: "easy",
@@ -117,6 +123,7 @@ const activities = [
   },
   {
     title: "Paintball",
+    imageFile: "/images/activities/paintball.jpg",
     description: "Group activity",
     location: "Podstrana",
     difficulty: "easy",
@@ -125,6 +132,7 @@ const activities = [
   },
   {
     title: "Bungee jumping",
+    imageFile: "/images/activities/bungeeJumping.jpg",
     description: "Bring adrenaline to its peak by jumping from a bridge",
     location: "Sibenik",
     difficulty: "hard",
