@@ -23,10 +23,10 @@ router.get("/create", (req, res, next) => {
 });
 
 // CREATE ONE NEW AGENCY:: process form
-router.post("/create", (req, res, next) => {
+router.post("/create", fileUploader.single('imageFile'), (req, res, next) => {
   const newAgency = {
     name: req.body.name,
-    imageFile: req.body.imageFile,
+    imageFile: req.file.path, //note: reading req.file
     email: req.body.email,
     passwordHash: req.body.passwordHash,
     description: req.body.description,
@@ -36,8 +36,9 @@ router.post("/create", (req, res, next) => {
 
   Agency.create(newAgency)
     .then((agencyFromDB) => {
-      console.log(newAgency);
-      res.redirect("/agencies");
+        //console.log(agencyFromDB);
+        console.log(newAgency);
+        res.redirect("/agencies");
     })
     .catch((err) => {
       console.log("error creating a new agency on DB", err);

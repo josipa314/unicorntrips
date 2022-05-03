@@ -1,39 +1,39 @@
 <h2>Edit the activity: {{title}}</h2>
 
-<form action="/activities/{{_id}}/edit" method="POST">
+<form action="/activities/{{_id}}/edit" method="POST" enctype="multipart/form-data">
+ 
   <label> Title:
-    <input type="text" name="title" value="{{title}}" />
+    <input type="text" name="title" {{!-- value="{{title}}" --}} />
   </label>
 
-   <label>Image:
-    <input type="text" name="imageFile" class="form-control-file" />
- </label> 
+   <label> Image:
+    <input type="file" name="imageFile" class="form-control-file" />
+  </label> 
 
-
-    <label> Description:
-    <textarea name="description" cols="50" rows="4">{{description}}</textarea>
+  <label> Description:
+    <textarea type="text" name="description" cols="50" rows="4">{{!-- {{description}} --}}</textarea>
   </label>
 
-  <label> Agency:
-    <input type="text" name="agency" value="{{this.agency}}" />
+  <label> Organised by Agency:
+    <input type="text" name="agency" {{!-- value="{{agency._id}}" --}} />
   </label>
 
   <label> Location:
-    <input type="text" name="location" value="{{location}}" />
+    <input type="text" name="location" {{!-- value="{{location}}" --}} />
   </label>
 
- <label>
-    Difficulty:
-    <input type="text" name="difficulty" />
+  <label> Difficulty:
+    <input type="text" name="difficulty" {{!-- value="{{difficulty}}" --}}/>
   </label>
 
   <label> Rating:
-    <input type="number" name="rating" min="1" max="10" value="{{rating}}" />
+    <input type="number" name="rating" min="1" max="10" {{!-- value="{{rating}}" --}} />
   </label>
 
- <label> Price:
-    <input type="number" name="rating" value="{{price}}" />
+  <label> Price:
+    <input type="number" name="price" {{!-- value="{{price}}"  --}}/>
   </label>
 
   <button>Save changes</button>
+
 </form>

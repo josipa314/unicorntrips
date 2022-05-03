@@ -49,7 +49,7 @@ router.post("/create", fileUploader.single('imageFile'), (req, res, next) => {
         .then((activityFromDB) => {
           //console.log(activityFromDB);
           //console.log(newActivity)
-          console.log(req.body);
+          //console.log(req.body);
           res.redirect("/activities");
         })
         .catch(err => {
@@ -65,7 +65,7 @@ router.get("/:activityId", (req, res, next) => {
 
   Activity.findById(id)
     .then((activityDetails) => {
-      console.log(activityDetails);
+      //console.log(activityDetails);
       res.render("activities/activity-details", activityDetails);
     })
     .catch((err) => {
@@ -79,6 +79,7 @@ router.get("/:activityId/edit", (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndUpdate(id)
     .then((activityDetails) => {
+      console.log(activityDetails);
       res.render("activities/activity-edit", activityDetails);
     })
     .catch((err) => {
@@ -88,25 +89,26 @@ router.get("/:activityId/edit", (req, res, next) => {
 });
 
 // UPDATE ONE ACTIVITY: process form
-router.post("/:activityId/edit", (req, res, next) => {
+router.post("/:activityId/edit", fileUploader.single('imageFile'), (req, res, next) => {
   const id = req.params.activityId;
 
   const newDetails = {
     title: req.body.title,
-    imageFile: req.body.imageFile,
+    imageFile: req.file.path, //note: reading req.file
     description: req.body.description,
     agency: req.body.agency,
     location: req.body.location,
     difficulty: req.body.difficulty,
     rating: req.body.rating,
-    price: req.body.price,
+    price: req.body.price
   };
 
   Activity.findByIdAndUpdate(id, newDetails)
     .then((activityFromDB) => {
       console.log(newDetails);
       console.log(activityFromDB);
-      res.redirect(`/activities/${activityFromDB._id}`);
+      console.log(req.body);
+      res.redirect("/activities");
     })
     .catch((err) => {
       console.log("error updating activity in DB", err);
