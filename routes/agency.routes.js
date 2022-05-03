@@ -19,9 +19,8 @@ router.get("/", (req, res, next) => {
 
 // CREATE: render form
 router.get("/create", (req, res, next) => {
-      res.render("agencies/agency-create");
-    });
-
+  res.render("agencies/agency-create");
+});
 
 // CREATE: process form
 router.post("/create", (req, res, next) => {
@@ -48,30 +47,29 @@ router.post("/create", (req, res, next) => {
 
 // READ ONE AGENCY DETAILS: display one Agency details
 router.get("/:agencyId", (req, res, next) => {
-    const id = req.params.agencyId;
+  const id = req.params.agencyId;
 
-    Agency.findById(id)
-        .then((agencyDetails) => {
-            console.log(agencyDetails)
-            res.render("agencies/agency-details", agencyDetails);
-        })
-        .catch(err => {
-            console.log("error getting agency details from DB", err)
-            next(err);
-        });
-})
+  Agency.findById(id)
+    .then((agencyDetails) => {
+      console.log(agencyDetails);
+      res.render("agencies/agency-details", agencyDetails);
+    })
+    .catch((err) => {
+      console.log("error getting agency details from DB", err);
+      next(err);
+    });
+});
 
 // DELETE that Agency:
-router.post("/:agencyId/delete",(req, res, next) => {
-    const id = req.params.agencyId;
-    Agency.findByIdAndRemove(id)
-        .then(response => {
-            res.redirect("/agencies");
-        })
-        .catch(err => {
-            console.log("error deleting Agency from DB", err);
-            next(err);
-        });
-
+router.post("/:agencyId/delete", (req, res, next) => {
+  const id = req.params.agencyId;
+  Agency.findByIdAndRemove(id)
+    .then((response) => {
+      res.redirect("/agencies");
+    })
+    .catch((err) => {
+      console.log("error deleting Agency from DB", err);
+      next(err);
+    });
 });
 module.exports = router;
