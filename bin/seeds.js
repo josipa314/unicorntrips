@@ -4,16 +4,7 @@ const Activity = require("../models/Activity.model");
 
 const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/UnicornTrips";
 
-mongoose
-  .connect(MONGO_URI)
-  .then((x) => {
-    console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
-    );
-  })
-  .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
-  });
+
 
 const agencies = [
   {
@@ -141,7 +132,13 @@ const activities = [
   },
 ];
 
-Agency.create(agencies)
+
+mongoose
+  .connect(MONGO_URI)
+  .then((x) => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
+    return Agency.create(agencies)
+  })
   .then((agencyFromDB) => {
     console.log(`Created ${agencyFromDB.length} agencies`);
     return Activity.create(activities);
@@ -152,4 +149,9 @@ Agency.create(agencies)
     // Once created, close the DB connection
     mongoose.connection.close();
   })
-  .catch((err) => console.log(`An error occurred seeding data in DB: ${err}`));
+  .catch((err) => {
+    console.error("Error seeding data: ", err);
+  });
+
+
+  
