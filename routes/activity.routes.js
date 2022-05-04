@@ -90,11 +90,12 @@ router.get("/:activityId/edit", (req, res, next) => {
 
 // UPDATE ONE ACTIVITY: process form
 router.post("/:activityId/edit", fileUploader.single('imageFile'), (req, res, next) => {
+
   const id = req.params.activityId;
 
   const newDetails = {
     title: req.body.title,
-    imageFile: req.file.path, //note: reading req.file
+    imageFile: req.file?.path, //note: reading req.file
     description: req.body.description,
     agency: req.body.agency,
     location: req.body.location,
@@ -128,4 +129,7 @@ router.post("/:activityId/delete", (req, res, next) => {
       next(err);
     });
 });
+
+
+
 module.exports = router;
