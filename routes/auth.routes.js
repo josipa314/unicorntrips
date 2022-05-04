@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const saltRounds = 10;
 
 // Require the User model in order to interact with the database
-const User = require("../models/Agency.model");
+const Agency = require("../models/Agency.model");
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
@@ -21,17 +21,17 @@ router.get("/signup", isLoggedOut, (req, res) => {
 
 //REGISTRATION: process form
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res.status(400).render("auth/signup", {
-      errorMessage: "Please provide your username.",
+      errorMessage: "Please provide your email.",
     });
   }
 
-  if (password.length < 8) {
+  if (password.length < 4) {
     return res.status(400).render("auth/signup", {
-      errorMessage: "Your password needs to be at least 8 characters long.",
+      errorMessage: "Your password needs to be at least 4 characters long.",
     });
   }
 
@@ -48,12 +48,12 @@ router.post("/signup", isLoggedOut, (req, res) => {
   */
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username }).then((found) => {
+  Agency.findOne({ email }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
       return res
         .status(400)
-        .render("auth.signup", { errorMessage: "Username already taken." });
+        .render("auth.signup", { errorMessage: "Email already taken." });
     }
 
     // if user is not found, create a new user - start with hashing the password
@@ -62,8 +62,8 @@ router.post("/signup", isLoggedOut, (req, res) => {
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
         // Create a user and save it in the database
-        return User.create({
-          username,
+        return Agency.create({
+          email,
           password: hashedPassword,
         });
       })
@@ -81,7 +81,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         if (error.code === 11000) {
           return res.status(400).render("auth/signup", {
             errorMessage:
-              "Username need to be unique. The username you chose is already in use.",
+              "Email need to be unique. The email you chose is already in use.",
           });
         }
         return res
@@ -98,24 +98,24 @@ router.get("/login", isLoggedOut, (req, res) => {
 
 //LOGIN: process form
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res.status(400).render("auth/login", {
-      errorMessage: "Please provide your username.",
+      errorMessage: "Please provide your email.",
     });
   }
 
   // Here we use the same logic as above
   // - either length based parameters or we check the strength of a password
-  if (password.length < 8) {
+  if (password.length < 4) {
     return res.status(400).render("auth/login", {
-      errorMessage: "Your password needs to be at least 8 characters long.",
+      errorMessage: "Your password needs to be at least 4 characters long.",
     });
   }
 
-  // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  // Search the database for a user with the email submitted in the form
+  Agency.findOne({ email })
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {

@@ -3,6 +3,9 @@ const Agency = require("../models/Agency.model");
 
 const router = require("express").Router();
 const fileUploader = require("../config/cloudinary.config");
+const isLoggedIn = require('../middleware/isLoggedIn');
+const isLoggedOut = require('../middleware/isLoggedOut');
+const isAgency = require('../middleware/isAgency');
 
 //SHOW ALL ACTIVITIES/
 router.get("/", (req, res, next) => {
@@ -19,7 +22,7 @@ router.get("/", (req, res, next) => {
 });
 
 // CREATE ONE NEW ACTIVITY: render form
-router.get("/create", (req, res, next) => {
+router.get("/create", isLoggedIn, (req, res, next) => {
   Agency.find()
     .then((agenciesArr) => {
       res.render("activities/activity-create", { agencies: agenciesArr });
@@ -32,7 +35,7 @@ router.get("/create", (req, res, next) => {
 
 
 // CREATE ONE NEW ACTIVITY: process form
-router.post("/create", fileUploader.single('imageFile'), (req, res, next) => {
+router.post("/create", isLoggedIn, fileUploader.single('imageFile'), (req, res, next) => {
 
     const newActivity = {
         title: req.body.title,
@@ -75,7 +78,7 @@ router.get("/:activityId", (req, res, next) => {
 });
 
 // UPDATE ONE ACTIVITY: display form
-router.get("/:activityId/edit", (req, res, next) => {
+router.get("/:activityId/edit", isLoggedIn, isAgency, (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndUpdate(id)
     .then((activityDetails) => {
@@ -89,7 +92,7 @@ router.get("/:activityId/edit", (req, res, next) => {
 });
 
 // UPDATE ONE ACTIVITY: process form
-router.post("/:activityId/edit", fileUploader.single('imageFile'), (req, res, next) => {
+router.post("/:activityId/edit", isLoggedIn, isAgency, fileUploader.single('imageFile'), (req, res, next) => {
 
   const id = req.params.activityId;
 
@@ -118,7 +121,7 @@ router.post("/:activityId/edit", fileUploader.single('imageFile'), (req, res, ne
 });
 
 // DELETE that activity:
-router.post("/:activityId/delete", (req, res, next) => {
+router.post("/:activityId/delete", isLoggedIn, isAgency, (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndRemove(id)
     .then((response) => {
