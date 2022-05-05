@@ -1,46 +1,55 @@
-<h3>Edit the Agency: {{name}}</h3>
+<section>
+  <fieldset>
+    <legend>Edit the Agency: {{name}}</legend>
+    <form
+      action="/agencies/{{_id}}/edit"
+      method="POST"
+      enctype="multipart/form-data"
+    >
 
-<form
-  action="/agencies/{{_id}}/edit"
-  method="POST"
-  enctype="multipart/form-data"
->
+      <label>
+        Name:
+        <input type="text" name="name" value="{{name}}" />
+      </label>
 
-  <label>
-    Name:
-    <input type="text" name="name" value="{{name}}" />
-  </label>
+      <label>
+        Image:
+        <input
+          type="file"
+          name="imageFile"
+          value="{{imageFile}}"
+          class="form-control-file"
+        />
+      </label>
 
-  <label>
-    Image:
-    <input
-      type="file"
-      name="imageFile"
-      value="{{imageFile}}"
-      class="form-control-file"
-    />
-  </label>
+      <label>
+        Description:
+        <textarea
+          type="text"
+          name="description"
+          cols="50"
+          rows="4"
+        >{{description}}</textarea>
+      </label>
 
-  <label>
-    Description:
-    <textarea
-      type="text"
-      name="description"
-      cols="50"
-      rows="4"
-    >{{description}}</textarea>
-  </label>
+      <label>
+        Location:
+        <input type="text" name="location" value="{{location}}" />
+      </label>
 
-  <label>
-    Location:
-    <input type="text" name="location" value="{{location}}" />
-  </label>
+      <label>
+        Rating:
+        <input
+          type="number"
+          name="rating"
+          min="1"
+          max="10"
+          value="{{rating}}"
+        />
+      </label>
 
-  <label>
-    Rating:
-    <input type="number" name="rating" min="1" max="10" value="{{rating}}" />
-  </label>
+      <button>Save changes</button>
+  </fieldset>
+    </form>
 
-  <button>Save changes</button>
-
-</form>
+</section>

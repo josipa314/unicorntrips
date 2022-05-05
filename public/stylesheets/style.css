@@ -1,11 +1,53 @@
-body {
-  padding: 50px;
-  font-family: "Lobster", cursive;
-  font-family: "Tapestry", cursive;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #00b7ff;
+body {
+  padding: 10px;
+  background-color: #fefbe7;
+  font-family: "Lobster", cursive;
+}
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex;
+  padding: 30px 10%;
+}
+
+a,
+li {
+  font-family: "Lobster", cursive;
+  font-weight: 500;
+  font-size: 16px;
+  color: #68a7ad;
+  text-decoration: none;
+}
+.nav-links {
+  list-style: none;
+  padding: 0 20px;
+}
+.nav-links li {
+  display: inline-block;
+}
+.nav-links li a {
+  transition: all 0.3s ease 0s;
+}
+.nav-links li a:hover {
+  color: #333c83;
+}
+
+button {
+  color: #68a7ad;
+  font-size: 16px;
+  padding: auto;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0, 3s ease 0s;
+}
+button:hover {
+  background-color: #333c83;
 }
 
 h1 {
@@ -16,20 +58,26 @@ h1 {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
-  color: #ff8e00;
+  color: #333c83;
+}
+h3 {
+  color: #333c83;
+  padding-left: 600px;
+  display: flex;
+  flex: auto;
 }
 #main {
-  border-bottom: 8px solid var(--decorative-guiding-red);
-  height: 520px;
-  margin-bottom: 20px;
-  padding: 15px 10px;
+  background-image: url(../images/let-us-travel.jpg);
+  background-size: cover;
+  height: 100vh;
   position: relative;
+  background-repeat: no-repeat;
 }
 .centered {
-  font-size: 30px;
+  font-size: 48px;
   position: absolute;
-  top: 40%;
-  left: 50%;
+  top: 43%;
+  left: 80%;
   transform: translate(-50%, -50%);
 }
 
@@ -39,41 +87,68 @@ h1 {
 }
 
 #imgAgencies {
-  width: 200px;
+  width: 300px;
   height: 200px;
 }
 #imgActivities {
-  width: 200px;
+  width: 300px;
   height: 200px;
 }
+section {
+  display: inline;
+}
 
-form {
+form,
+label {
   display: block;
-  margin: 1rem auto;
+  margin-top: 0;
 }
 
 input,
 textarea,
 select {
+  padding: 0.5em;
+  border: solid 2px #333c83;
   display: block;
   margin: 0.5rem 0 1rem;
 }
-
-nav {
-  text-align: end;
-  font-size: 16px;
+fieldset {
+  margin: 2em 0;
+  padding: 1em 2em;
+  border: solid 1px #333c83;
+  border-radius: 6px;
+  min-width: 200px;
 }
-
-header form {
-  display: inline-block;
+legend {
+  font-size: 24px;
+  padding: 0.5em;
+  color: #333c83;
 }
-
-.header {
-  text-align: start;
+@media screen and (min-width: 430px) {
+  legend {
+    font-size: 1.75em;
+  }
+  fieldset {
+    width: 40%;
+    min-width: 320px;
+  }
 }
 
 .warning {
   border: 1px solid rgb(167, 111, 9);
   background-color: rgb(235, 212, 170);
   padding: 1rem;
+}
+
+.activities-list {
+  display: inline-block;
+  justify-content: row;
+  align-items: flex;
+  padding: 30px 10%;
+}
+.agency-list {
+  display: inline-block;
+  justify-content: row;
+  align-items: flex;
+  padding: 30px 10%;
 }

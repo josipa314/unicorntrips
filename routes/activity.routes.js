@@ -3,9 +3,9 @@ const Agency = require("../models/Agency.model");
 
 const router = require("express").Router();
 const fileUploader = require("../config/cloudinary.config");
-const isLoggedIn = require('../middleware/isLoggedIn');
-const isLoggedOut = require('../middleware/isLoggedOut');
-const isAgency = require('../middleware/isAgency');
+const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedOut = require("../middleware/isLoggedOut");
+const isAgency = require("../middleware/isAgency");
 
 //SHOW ALL ACTIVITIES/
 router.get("/", (req, res, next) => {
@@ -33,34 +33,36 @@ router.get("/create", isLoggedIn, (req, res, next) => {
     });
 });
 
-
 // CREATE ONE NEW ACTIVITY: process form
-router.post("/create", isLoggedIn, fileUploader.single('imageFile'), (req, res, next) => {
-
+router.post(
+  "/create",
+  isLoggedIn,
+  fileUploader.single("imageFile"),
+  (req, res, next) => {
     const newActivity = {
-        title: req.body.title,
-        imageFile: req.file.path, //note: reading req.file
-        description: req.body.description,
-        agency: req.body.agency,
-        location: req.body.location,
-        difficulty: req.body.difficulty,
-        rating: req.body.rating,
-        price: req.body.price
+      title: req.body.title,
+      imageFile: req.file.path, //note: reading req.file
+      description: req.body.description,
+      agency: req.body.agency,
+      location: req.body.location,
+      difficulty: req.body.difficulty,
+      rating: req.body.rating,
+      price: req.body.price,
     };
 
     Activity.create(newActivity)
-        .then((activityFromDB) => {
-          //console.log(activityFromDB);
-          //console.log(newActivity)
-          //console.log(req.body);
-          res.redirect("/activities");
-        })
-        .catch(err => {
-            console.log("error creating a new activity on DB", err)
-            next(err);
-        });
-})
-
+      .then((activityFromDB) => {
+        //console.log(activityFromDB);
+        //console.log(newActivity)
+        //console.log(req.body);
+        res.redirect("/activities");
+      })
+      .catch((err) => {
+        console.log("error creating a new activity on DB", err);
+        next(err);
+      });
+  }
+);
 
 // READ ONE ACTIVITY DETAILS: display activity details
 router.get("/:activityId", (req, res, next) => {
@@ -92,33 +94,35 @@ router.get("/:activityId/edit", isLoggedIn, isAgency, (req, res, next) => {
 });
 
 // UPDATE ONE ACTIVITY: process form
-router.post("/:activityId/edit", isLoggedIn, isAgency, fileUploader.single('imageFile'), (req, res, next) => {
+router.post(
+  "/:activityId/edit",
+  isLoggedIn,
+  isAgency,
+  fileUploader.single("imageFile"),
+  (req, res, next) => {
+    const id = req.params.activityId;
 
-  const id = req.params.activityId;
+    const newDetails = {
+      title: req.body.title,
+      imageFile: req.file?.path, //note: reading req.file
+      description: req.body.description,
+      agency: req.body.agency,
+      location: req.body.location,
+      difficulty: req.body.difficulty,
+      rating: req.body.rating,
+      price: req.body.price,
+    };
 
-  const newDetails = {
-    title: req.body.title,
-    imageFile: req.file?.path, //note: reading req.file
-    description: req.body.description,
-    agency: req.body.agency,
-    location: req.body.location,
-    difficulty: req.body.difficulty,
-    rating: req.body.rating,
-    price: req.body.price
-  };
-
-  Activity.findByIdAndUpdate(id, newDetails)
-    .then((activityFromDB) => {
-      console.log(newDetails);
-      console.log(activityFromDB);
-      console.log(req.body);
-      res.redirect("/activities");
-    })
-    .catch((err) => {
-      console.log("error updating activity in DB", err);
-      next(err);
-    });
-});
+    Activity.findByIdAndUpdate(id, newDetails)
+      .then((activityFromDB) => {
+        res.redirect("/activities");
+      })
+      .catch((err) => {
+        console.log("error updating activity in DB", err);
+        next(err);
+      });
+  }
+);
 
 // DELETE that activity:
 router.post("/:activityId/delete", isLoggedIn, isAgency, (req, res, next) => {
@@ -132,7 +136,5 @@ router.post("/:activityId/delete", isLoggedIn, isAgency, (req, res, next) => {
       next(err);
     });
 });
-
-
 
 module.exports = router;

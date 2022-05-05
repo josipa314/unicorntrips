@@ -1,14 +1,18 @@
-<h2>Create a new activity</h2>
 
+<section>
 <form action="/activities/create" method="POST" enctype="multipart/form-data">
-
+<fieldset>
+  <legend>Create a new Activity</legend>
   <label>
     Title:
     <input type="text" name="title" required />
   </label>
 
+    <input type="file" name="imageFile" class="form-control-file" />
  <label>Upload an Image: 
     <input type="file" name="imageFile" class="form-control-file" />
+    <input type="file" name="imageFile" class="form-control-file" />
+
  </label> 
 
 
@@ -21,7 +25,7 @@
     Organised by Agency:
     <select name="agency">
       {{#each agencies}}
-        <option  value="{{this._id}}">{{this.name}}</option>
+      {{/each}}
       {{/each}}
     </select>
   </label>
@@ -30,7 +34,6 @@
     Location:
     <input type="text" name="location" />
   </label>
-
 
   <label>
     Difficulty:
@@ -49,3 +52,4 @@
 
   <button type="submit"> Create this new activity!</button>
 </form>
+</section>
