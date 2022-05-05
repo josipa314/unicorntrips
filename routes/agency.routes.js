@@ -23,7 +23,7 @@ router.get("/create", (req, res, next) => {
 });
 
 // CREATE ONE NEW AGENCY:: process form
-router.post("/create", fileUploader.single('imageFile'), (req, res, next) => {
+router.post("/create", fileUploader.single("imageFile"), (req, res, next) => {
   const newAgency = {
     name: req.body.name,
     imageFile: req.file.path, //note: reading req.file
@@ -31,14 +31,14 @@ router.post("/create", fileUploader.single('imageFile'), (req, res, next) => {
     passwordHash: req.body.passwordHash,
     description: req.body.description,
     location: req.body.location,
-    rating: req.body.rating
+    rating: req.body.rating,
   };
 
   Agency.create(newAgency)
     .then((agencyFromDB) => {
-        //console.log(agencyFromDB);
-        console.log(newAgency);
-        res.redirect("/agencies");
+      //console.log(agencyFromDB);
+      console.log(newAgency);
+      res.redirect("/agencies");
     })
     .catch((err) => {
       console.log("error creating a new agency on DB", err);
@@ -60,6 +60,47 @@ router.get("/:agencyId", (req, res, next) => {
       next(err);
     });
 });
+
+// UPDATE ONE ACTIVITY: display form
+router.get("/:agencyId/edit", (req, res, next) => {
+  const id = req.params.agencyId;
+  Agency.findByIdAndUpdate(id)
+    .then((agencyDetails) => {
+      console.log(agencyDetails);
+      res.render("agencies/agency-edit", agencyDetails);
+    })
+    .catch((err) => {
+      console.log("error getting aagency details from DB", err);
+      next(err);
+    });
+});
+
+// UPDATE ONE Agency: process form
+router.post(
+  "/:agencyId/edit",
+
+  fileUploader.single("imageFile"),
+  (req, res, next) => {
+    const id = req.params.agencyId;
+
+    const newDetails = {
+      name: req.body.name,
+      imageFile: req.file?.path, //note: reading req.file
+      description: req.body.description,
+      location: req.body.location,
+      rating: req.body.rating,
+    };
+
+    Agency.findByIdAndUpdate(id, newDetails)
+      .then((agencyFromDB) => {
+        res.redirect("/agencies");
+      })
+      .catch((err) => {
+        console.log("error updating agency in DB", err);
+        next(err);
+      });
+  }
+);
 
 // DELETE that Agency:
 router.post("/:agencyId/delete", (req, res, next) => {
