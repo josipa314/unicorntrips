@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const saltRounds = 10;
 
 // Require the User model in order to interact with the database
-const Agency = require("../models/Agency.model");
+const User = require("../models/User.model");
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
@@ -48,7 +48,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
   */
 
   // Search the database for a user with the username submitted in the form
-  Agency.findOne({ email }).then((found) => {
+  User.findOne({ email }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
       return res
@@ -62,7 +62,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
         // Create a user and save it in the database
-        return Agency.create({
+        return User.create({
           email,
           password: hashedPassword,
         });
@@ -115,7 +115,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   }
 
   // Search the database for a user with the email submitted in the form
-  Agency.findOne({ email })
+  User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {
@@ -131,8 +131,11 @@ router.post("/login", isLoggedOut, (req, res, next) => {
             errorMessage: "Wrong credentials.",
           });
         }
+
+        //
+        // login was successful
+        // 
         req.session.user = user;
-        // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
         return res.redirect("/");
       });
     })
@@ -146,7 +149,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 });
 
 //USER PROFILE PAGE
-router.get('/user-profile', (req, res, next) => {
+router.get('/user-profile', isLoggedIn, (req, res, next) => {
   res.render('auth/user-profile');
 });
 

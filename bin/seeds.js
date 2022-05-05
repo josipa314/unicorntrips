@@ -11,7 +11,7 @@ const agencies = [
     name: "Island Hoppers",
     imageFile: "/images/agencies/Islandhopping.webp",
     email: "test1@test.com",
-    passwordHash: "12345678",
+    password: "12345678",
     description: "specialised in Island trips",
     location: "Split",
     rating: 7,
@@ -20,7 +20,7 @@ const agencies = [
     name: "Fantastic Voyages",
     imageFile: "/images/agencies/FantasticVoyages.webp",
     email: "test2@test.com",
-    passwordHash: "12345678",
+    password: "12345678",
     description: "specialised in honeymoontrips, special occasion trips",
     location: "Zadar",
     rating: 9,
@@ -29,7 +29,7 @@ const agencies = [
     name: "Braveheart Adventures",
     imageFile: "/images/agencies/BraveHeartAdventures.png",
     email: "test3@test.com",
-    passwordHash: "12345678",
+    password: "12345678",
     description: "specialised in more adventourous tours",
     location: "Split",
     rating: 6,
@@ -38,7 +38,7 @@ const agencies = [
     name: "The Wandering Wayfarer",
     imageFile: "/images/agencies/WanderingWayfarers.jpg",
     email: "test4@test.com",
-    passwordHash: "12345678",
+    password: "12345678",
     description: "specialised in more adventourous tours",
     location: "Zagreb",
     rating: 6,
@@ -50,6 +50,7 @@ const activities = [
     title: "Blue Cave Boat Tour",
     imageFile: "/images/activities/blueCave.jpg",
     description: "Discover Blue cave on a daily trip via boat tour",
+   /*  agency: "Island Hoppers", */
     location: "Vis Island",
     difficulty: "easy",
     rating: 10,
@@ -59,6 +60,7 @@ const activities = [
     title: "ZipLine",
     imageFile: "/images/activities/zipline-omis.jpeg",
     description: "Sensations guaranteed via Zipline above Omis",
+  /*   agency: "Braveheart Adventures", */
     location: "Omis",
     difficulty: "hard",
     rating: 9,
@@ -68,6 +70,7 @@ const activities = [
     title: "Horse Riding",
     imageFile: "/images/activities/horseRiding.jpg",
     description: "Discover less touristic paths in the country side by horse",
+    /* agency: "The Wandering Wayfarer", */
     location: "Podstrana",
     difficulty: "accessible",
     rating: 8,
@@ -76,8 +79,8 @@ const activities = [
   {
     title: "Islands Tour",
     imageFile: "/images/activities/hvarIsland.jpg",
-    description:
-      "Discover two of the most famous islands in Croatia: Hvar and Brac",
+    description: "Discover two of the most famous islands in Croatia: Hvar and Brac",
+    /* agency: "Island Hoppers", */
     location: "Hvar",
     difficulty: "accessible",
     rating: 6,
@@ -86,8 +89,8 @@ const activities = [
   {
     title: "Canyoning",
     imageFile: "/images/activities/canyoning.jpg",
-    description:
-      " explore thousands of years old canyon and it's crystal clear water ",
+    description:" explore thousands of years old canyon and it's crystal clear water ",
+  /*   agency: "The Wandering Wayfarer", */
     location: "Omis",
     difficulty: "accessible",
     rating: 8,
@@ -96,8 +99,8 @@ const activities = [
   {
     title: "Skydiving",
     imageFile: "/images/activities/skydivingZagreb.jpg",
-    description:
-      "Unforgettable experience, full of adrenaline but also beautiful views over the sea and mountains",
+    description: "Unforgettable experience, full of adrenaline but also beautiful views over the sea and mountains",
+  /*   agency: "Braveheart Adventures", */
     location: "Zagreb",
     difficulty: "hard",
     rating: 6,
@@ -107,6 +110,7 @@ const activities = [
     title: "Creepy tour",
     imageFile: "/images/activities/abondonedFactories.jpg",
     description: "Go explore abondoned buidings and factories",
+  /*   agency: "Fantastic Voyages", */
     location: "Sinj",
     difficulty: "easy",
     rating: 3,
@@ -116,6 +120,7 @@ const activities = [
     title: "Paintball",
     imageFile: "/images/activities/paintball.jpg",
     description: "Group activity",
+   /*  agency: "Fantastic Voyages", */
     location: "Podstrana",
     difficulty: "easy",
     rating: 3,
@@ -125,6 +130,7 @@ const activities = [
     title: "Bungee jumping",
     imageFile: "/images/activities/bungeeJumping.jpg",
     description: "Bring adrenaline to its peak by jumping from a bridge",
+    /* agency: "Braveheart Adventures", */
     location: "Sibenik",
     difficulty: "hard",
     rating: 3,

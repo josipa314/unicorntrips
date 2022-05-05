@@ -28,7 +28,7 @@ router.post("/create", fileUploader.single("imageFile"), (req, res, next) => {
     name: req.body.name,
     imageFile: req.file.path, //note: reading req.file
     email: req.body.email,
-    passwordHash: req.body.passwordHash,
+    password: req.body.password,
     description: req.body.description,
     location: req.body.location,
     rating: req.body.rating,
