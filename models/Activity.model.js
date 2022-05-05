@@ -17,6 +17,10 @@ const activitySchema = new Schema({
   difficulty: String,
   rating: Number,
   price: Number,
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 const Activity = model("Activity", activitySchema);

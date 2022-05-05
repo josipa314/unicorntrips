@@ -1,11 +1,12 @@
 const Activity = require("../models/Activity.model");
 const Agency = require("../models/Agency.model");
+const User = require("../models/User.model");
 
 const router = require("express").Router();
 const fileUploader = require("../config/cloudinary.config");
-/* const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
-const isAgency = require("../middleware/isAgency"); */
+const isCreator = require("../middleware/isCreator");
 
 //SHOW ALL ACTIVITIES/
 router.get("/", (req, res, next) => {
@@ -22,7 +23,7 @@ router.get("/", (req, res, next) => {
 });
 
 // CREATE ONE NEW ACTIVITY: render form
-router.get("/create", (req, res, next) => {
+router.get("/create", isLoggedIn, (req, res, next) => {
   Agency.find()
     .then((agenciesArr) => {
       res.render("activities/activity-create", { agencies: agenciesArr });
@@ -34,7 +35,7 @@ router.get("/create", (req, res, next) => {
 });
 
 // CREATE ONE NEW ACTIVITY: process form
-router.post("/create", fileUploader.single("imageFile"), (req, res, next) => {
+router.post("/create", isLoggedIn, fileUploader.single("imageFile"), (req, res, next) => {
   const newActivity = {
     title: req.body.title,
     imageFile: req.file.path, //note: reading req.file
@@ -44,6 +45,7 @@ router.post("/create", fileUploader.single("imageFile"), (req, res, next) => {
     difficulty: req.body.difficulty,
     rating: req.body.rating,
     price: req.body.price,
+    creator: req.session.user
   };
 
   Activity.create(newActivity)
@@ -79,8 +81,9 @@ router.get("/:activityId/edit", (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndUpdate(id)
     .populate("agency")
+    .populate("creator")
     .then((activityDetails) => {
-      console.log(activityDetails);
+      //console.log(activityDetails);
       res.render("activities/activity-edit", activityDetails);
     })
     .catch((err) => {
@@ -91,7 +94,7 @@ router.get("/:activityId/edit", (req, res, next) => {
 
 // UPDATE ONE ACTIVITY: process form
 router.post(
-  "/:activityId/edit",
+  "/:activityId/edit", isCreator,
   fileUploader.single("imageFile"),
   (req, res, next) => {
     const id = req.params.activityId;
@@ -100,7 +103,7 @@ router.post(
       title: req.body.title,
       imageFile: req.file?.path, //note: reading req.file
       description: req.body.description,
-      agency: req.body.agency,
+    /*   agency: req.body.agency, */
       location: req.body.location,
       difficulty: req.body.difficulty,
       rating: req.body.rating,
@@ -108,9 +111,11 @@ router.post(
     };
 
     Activity.findByIdAndUpdate(id, newDetails)
-      .populate("agency")
+      .populate("creator")
       .then((activityFromDB) => {
-        console.log(newDetails);
+/*         console.log(newDetails);
+        console.log(activityFromDB);
+        console.log(req.body); */
         res.redirect("/activities");
       })
       .catch((err) => {
@@ -121,7 +126,7 @@ router.post(
 );
 
 // DELETE that activity:
-router.post("/:activityId/delete", (req, res, next) => {
+router.post("/:activityId/delete", isCreator, (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndRemove(id)
     .then((response) => {
