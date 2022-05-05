@@ -3,32 +3,29 @@
 <form action="/activities/create" method="POST" enctype="multipart/form-data">
 <fieldset>
   <legend>Create a new Activity</legend>
+  
   <label>
     Title:
     <input type="text" name="title" required />
   </label>
 
-    <input type="file" name="imageFile" class="form-control-file" />
  <label>Upload an Image: 
     <input type="file" name="imageFile" class="form-control-file" />
-    <input type="file" name="imageFile" class="form-control-file" />
-
  </label> 
 
 
-  <label>
-    Description:
+  <label> Description:
     <textarea type="text" name="description" cols="30" rows="4"> </textarea>
   </label>
 
-  <label>
-    Organised by Agency:
+  <label>Organised by Agency:
     <select name="agency">
       {{#each agencies}}
-      {{/each}}
+        <option value="{{this._id}}">{{this.name}}</option>
       {{/each}}
     </select>
   </label>
+
 
   <label>
     Location:
