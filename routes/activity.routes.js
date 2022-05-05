@@ -22,7 +22,7 @@ router.get("/", (req, res, next) => {
 });
 
 // CREATE ONE NEW ACTIVITY: render form
-router.get("/create",  (req, res, next) => {
+router.get("/create", (req, res, next) => {
   Agency.find()
     .then((agenciesArr) => {
       res.render("activities/activity-create", { agencies: agenciesArr });
@@ -34,32 +34,30 @@ router.get("/create",  (req, res, next) => {
 });
 
 // CREATE ONE NEW ACTIVITY: process form
-router.post(
-  "/create", fileUploader.single("imageFile"), (req, res, next) => {
-    const newActivity = {
-      title: req.body.title,
-      imageFile: req.file.path, //note: reading req.file
-      description: req.body.description,
-      agency: req.body.agency,
-      location: req.body.location,
-      difficulty: req.body.difficulty,
-      rating: req.body.rating,
-      price: req.body.price,
-    };
+router.post("/create", fileUploader.single("imageFile"), (req, res, next) => {
+  const newActivity = {
+    title: req.body.title,
+    imageFile: req.file.path, //note: reading req.file
+    description: req.body.description,
+    agency: req.body.agency,
+    location: req.body.location,
+    difficulty: req.body.difficulty,
+    rating: req.body.rating,
+    price: req.body.price,
+  };
 
-    Activity.create(newActivity)
-      .then((activityFromDB) => {
-        //console.log(activityFromDB);
-        //console.log(newActivity)
-        //console.log(req.body);
-        res.redirect("/activities");
-      })
-      .catch((err) => {
-        console.log("error creating a new activity on DB", err);
-        next(err);
-      });
-  }
-);
+  Activity.create(newActivity)
+    .then((activityFromDB) => {
+      //console.log(activityFromDB);
+      //console.log(newActivity)
+      //console.log(req.body);
+      res.redirect("/activities");
+    })
+    .catch((err) => {
+      console.log("error creating a new activity on DB", err);
+      next(err);
+    });
+});
 
 // READ ONE ACTIVITY DETAILS: display activity details
 router.get("/:activityId", (req, res, next) => {
@@ -77,9 +75,10 @@ router.get("/:activityId", (req, res, next) => {
 });
 
 // UPDATE ONE ACTIVITY: display form
-router.get("/:activityId/edit",  (req, res, next) => {
+router.get("/:activityId/edit", (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndUpdate(id)
+    .populate("agency")
     .then((activityDetails) => {
       console.log(activityDetails);
       res.render("activities/activity-edit", activityDetails);
@@ -109,7 +108,9 @@ router.post(
     };
 
     Activity.findByIdAndUpdate(id, newDetails)
+      .populate("agency")
       .then((activityFromDB) => {
+        console.log(newDetails);
         res.redirect("/activities");
       })
       .catch((err) => {
