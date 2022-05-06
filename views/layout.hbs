@@ -5,39 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{appTitle}}</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
-    <h1 class="title">UnicornTrips</h1>
-    <header >
-      <div class="munu-btn">
-        <div class="menu-btn-burger">
-          <nav>
-            <ul class="nav-links">
-              <li> <a href="/">Home</a></li>
+    {{!<h1 class="title">UnicornTrips</h1>
+    <header>
 
-              <li> <a href="/activities">Activities</a></li>
+      <nav>
+        <ul class="nav-links">
+          <li> <a href="/"></a></li>
 
-              <li> <a href="/agencies">Agencies</a></li>
+          <li> <a href="/activities">Activities</a></li>
 
-              <li> <a href="/agencies/create">New Agency</a></li>
+          <li> <a href="/agencies">Agencies</a></li>
 
-              <li> <a href="/activities/create">New Activity</a></li>
+          <li> <a href="/agencies/create">New Agency</a></li>
 
-              <li> <a href="/auth/signup">Register</a></li>
+          <li> <a href="/activities/create">New Activity</a></li>
 
-              <li> <a href="/auth/login">Login</a></li>
+          <li> <a href="/auth/signup">Register</a></li>
 
-              <li> <a href="/auth/user-profile">Profile</a></li>
+          <li> <a href="/auth/login">Login</a></li>
 
-              <li> <a href="/auth/logout">Logout</a></li>
-            </ul>
-          </nav>
+          <li> <a href="/auth/user-profile">Profile</a></li>
+
+          <li> <a href="/auth/logout">Logout</a></li>
+        </ul>
+      </nav>
+
+    </header>}}
+    <div class="container">
+      <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+      >
+        <a href="/"><span class="fs-4">UnicornTrips</span></a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li><a
+              href="/activities"
+              class="nav-link px-2 link-dark"
+            >Activities</a></li>
+          <li><a
+              href="/agencies"
+              class="nav-link px-2 link-dark"
+            >Agencies</a></li>
+          <li><a href="/agencies/create" class="nav-link px-2 link-dark">Become
+              Agency</a></li>
+          <li><a href="/activities/create" class="nav-link px-2 link-dark">New
+              Activity</a></li>
+          <li><a
+              href="/auth/user-profile"
+              class="nav-link px-2 link-dark"
+            >Profile</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+          <a
+            href="/auth/login"
+            role="button"
+            class="btn btn-outline-primary me-2"
+          >Login</a>
+          </div>
+          <a
+            href="/auth/signup"
+            role="button"
+            class="btn btn-primary"
+          >Register</a>
         </div>
-      </div>
-    </header>
+        <div>
+          {{#if isLoggedIn}}
+            <a
+              href="/auth/logout"
+              role="button"
+              class="btn btn-primary"
+            >Logout</a>
+          {{/if}}
+
+        </div>
+      </header>
+    </div>
 
     {{{body}}}
 
