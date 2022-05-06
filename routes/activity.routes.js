@@ -77,7 +77,7 @@ router.get("/:activityId", (req, res, next) => {
 });
 
 // UPDATE ONE ACTIVITY: display form
-router.get("/:activityId/edit", (req, res, next) => {
+router.get("/:activityId/edit", isLoggedIn, (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndUpdate(id)
     .populate("agency")
@@ -93,10 +93,7 @@ router.get("/:activityId/edit", (req, res, next) => {
 });
 
 // UPDATE ONE ACTIVITY: process form
-router.post(
-  "/:activityId/edit", isCreator,
-  fileUploader.single("imageFile"),
-  (req, res, next) => {
+router.post("/:activityId/edit", isLoggedIn, fileUploader.single("imageFile"), (req, res, next) => {
     const id = req.params.activityId;
 
     const newDetails = {
@@ -126,7 +123,7 @@ router.post(
 );
 
 // DELETE that activity:
-router.post("/:activityId/delete", isCreator, (req, res, next) => {
+router.post("/:activityId/delete", isLoggedIn, (req, res, next) => {
   const id = req.params.activityId;
   Activity.findByIdAndRemove(id)
     .then((response) => {
