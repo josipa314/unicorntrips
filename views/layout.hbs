@@ -78,27 +78,28 @@
         </ul>
 
         <div class="col-md-3 text-end">
+          {{#if userDetails}}
+              <div>
+              <a
+                href="/auth/logout"
+                role="button"
+                class="btn btn-primary"
+              >Logout</a>
+            </div>
+          {{else}}
           <a
             href="/auth/login"
             role="button"
             class="btn btn-outline-primary me-2"
           >Login</a>
-          </div>
           <a
             href="/auth/signup"
             role="button"
             class="btn btn-primary"
           >Register</a>
-        </div>
-        <div>
-          {{#if isLoggedIn}}
-            <a
-              href="/auth/logout"
-              role="button"
-              class="btn btn-primary"
-            >Logout</a>
           {{/if}}
 
+         
         </div>
       </header>
     </div>
